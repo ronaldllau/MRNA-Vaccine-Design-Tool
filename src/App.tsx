@@ -31,24 +31,16 @@ function InputForm() {
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const validateSequence = (input: string) => {
-    const upperInput = input.replace(/\s/g, '').toUpperCase();
-    return Array.from(upperInput).every(char => VALID_AMINO_ACIDS.has(char));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const trimmedSequence = sequence.trim().toUpperCase();
+    const trimmedSequence = sequence.trim().toUpperCase().slice(13);
     
     if (!trimmedSequence) {
       setError('Please enter a protein sequence.');
       return;
     }
 
-    if (!validateSequence(trimmedSequence)) {
-      setError('Invalid sequence. Please use only valid single-letter amino acid codes (A-Y).');
-      return;
-    }
 
     setError('');
     setIsProcessing(true);
@@ -82,7 +74,7 @@ function InputForm() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
-            Protein Sequence Input
+            Antigenic Epitopes Prediction
           </h1>
           
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -97,7 +89,7 @@ function InputForm() {
                 id="sequence"
                 value={sequence}
                 onChange={(e) => setSequence(e.target.value)}
-                placeholder="Enter your protein sequence here (single-letter amino acid codes)"
+                placeholder="Enter your protein sequence here (fasta format)"
                 className="w-full min-h-[150px] p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 font-mono"
                 spellCheck="false"
                 disabled={isProcessing}
@@ -127,6 +119,23 @@ function InputForm() {
               >
                 Clear
               </button>
+            </div>
+          
+            <div>
+              <p
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Sample Protein Sequence
+              </p>
+              <p
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                {'>'}YP_060183.1
+                MFRLLKRACSFLLFFVIYQSFVIHHNVQRVLAYKPMVEKTLAENDTKANVDLV
+                LAMIYTETKGGEADVMQSSESSSGQKNSITDSQASIEHGVNLLSHNLALAEEA
+                GVDSWTAVQAYNFGTAYIDYIAKHGGQNTVDLATTYSKTVVAPSLGNTSGQTY
+                FYYHPLALISGGKLYKNGGNIYYSREVHFNLYLIELMSLF
+              </p>
             </div>
           </form>
         </div>
