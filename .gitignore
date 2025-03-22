@@ -1,1 +1,29 @@
-node_modules
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+frontend/coverage/
+frontend/build/
+frontend/.DS_Store
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*/*/__pycache__/
+backend/*.pyc
+backend/.env
+backend/.env.local
+backend/instance/
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
